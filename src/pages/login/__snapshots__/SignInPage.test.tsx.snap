@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignInPage /> snapshots default render 1`] = `
+<div
+  style={
+    Object {
+      "marginTop": "3rem",
+      "textAlign": "left",
+    }
+  }
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="user_id"
+    >
+      User id
+      <input
+        id="user_id"
+        name="userId"
+        onChange={[Function]}
+        style={
+          Object {
+            "marginTop": 12,
+          }
+        }
+        value=""
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="password"
+    >
+      Password
+      <input
+        id="password"
+        name="password"
+        onChange={[Function]}
+        style={
+          Object {
+            "marginTop": 12,
+          }
+        }
+        type="password"
+        value=""
+      />
+    </label>
+    <br />
+    <button
+      style={
+        Object {
+          "marginTop": 12,
+        }
+      }
+      type="submit"
+    >
+      Sign in
+    </button>
+  </form>
+</div>
+`;

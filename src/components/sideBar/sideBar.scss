@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+@import '../../styles/zIndex';
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  border-right: 1px solid $sidebar-border;
+  box-shadow: 0 0.125rem 0.25rem $sidebar-box-shadow-color;
+  background: $sidebar-bg-color;
+  color: $white-color;
+  z-index: $zIndexSideBar;
+
+  &-fluid {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 100vh;
+  }
+
+  &-title {
+    margin-bottom: 0;
+  }
+
+  &-section {
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+
+  &-menu {
+    padding: 0;
+  }
+
+  &-menu-entry {
+    margin-bottom: 5px;
+  }
+
+  &-menu-entry-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: $white-color;
+    padding: 5px 15px;
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      content: '';
+      padding: 3px;
+      border: 1px solid $white-color;
+      border-width: 0 3px 3px 0;
+      transform: translate(0, -50%) rotate(135deg);
+    }
+
+    &.active {
+      box-shadow: inset 3px 0 0 0 $active-color;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound Page snapshots render PageNotFound Page 1`] = `
+<div
+  className="layout"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-12"
+    >
+      <h1
+        className="text-center"
+      >
+        Page Not Found
+      </h1>
+    </div>
+    <div
+      className="col-12"
+    >
+      <div
+        className="text-center"
+      >
+        <a
+          className="text-decoration-none"
+          href="/"
+          onClick={[Function]}
+        >
+          <i
+            className="fa fa-angle-left mr-2"
+          />
+          <span>
+            Back to Home
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

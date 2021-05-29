@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome Page snapshots render Welcome Page 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-12"
+  >
+    <h1
+      className="text-center"
+    >
+      Welcome to To Do App
+    </h1>
+  </div>
+</div>
+`;

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToDoPage /> snapshots default render 1`] = `
+<div
+  className="ToDo__container"
+>
+  <div
+    className="Todo__creation"
+  >
+    <input
+      className="Todo__input"
+      onKeyDown={[Function]}
+      placeholder="What need to be done?"
+    />
+  </div>
+  <div
+    className="ToDo__list"
+  />
+  <div
+    className="Todo__toolbar"
+  >
+    <div />
+    <div
+      className="Todo__tabs"
+    >
+      <button
+        className="Action__btn"
+        onClick={[Function]}
+      >
+        All
+      </button>
+      <button
+        className="Action__btn"
+        onClick={[Function]}
+      >
+        Active
+      </button>
+      <button
+        className="Action__btn"
+        onClick={[Function]}
+      >
+        Completed
+      </button>
+    </div>
+    <button
+      className="Action__btn"
+      onClick={[Function]}
+    >
+      Clear all todos
+    </button>
+  </div>
+</div>
+`;

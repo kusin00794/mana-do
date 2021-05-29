@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb Page snapshots render Breadcrumb Page 1`] = `
+<ul
+  className="nav"
+>
+  <li
+    className="nav-item"
+  >
+    <a
+      className="nav-text"
+      href="/"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-home"
+      />
+    </a>
+  </li>
+</ul>
+`;
