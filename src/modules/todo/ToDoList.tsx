@@ -1,23 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import { KEY_NAMES } from '../../constants/keyCode';
 import { isTodoCompleted } from '../../utils';
-import { IToDoList } from './TodoList.d';
+import { IToDoList, UpdateToDoInfo } from './TodoList.d';
 
 const ToDoList = (props: IToDoList) => {
-  const { showTodos, onUpdateTodoStatus, onDeleteTodo } = props;
+  const { showTodos, onUpdateTodoStatus, onDeleteTodo, onUpdateToDo, showingStatus } = props;
+  const [updateToDo, setUpdateToDo] = useState<UpdateToDoInfo | null>(null);
+
+  const handleOnDoubleClick = (todoInfo: UpdateToDoInfo) => {
+    setUpdateToDo(todoInfo);
+  };
+
+  const handleOnBlur = () => {
+    setUpdateToDo(null);
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>, todoId: string) => {
+    const newTodoInfo = {
+      content: e.target.value,
+      todoId,
+    };
+
+    setUpdateToDo(newTodoInfo);
+  };
+
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === KEY_NAMES.ENTER) {
+      if (updateToDo && updateToDo.content) {
+        onUpdateToDo(updateToDo);
+        setUpdateToDo(null);
+      } else {
+        setUpdateToDo(null);
+      }
+    }
+  };
+
   return (
-    <div className="ToDo__list">
-      {showTodos.map((todo, index) => {
-        return (
-          <div key={index} className="ToDo__item">
-            <input type="checkbox" checked={isTodoCompleted(todo)} onChange={(e) => onUpdateTodoStatus(e, todo.id)} />
-            <span>{todo.content}</span>
-            <button className="Todo__delete" onClick={() => onDeleteTodo(todo.id)}>
-              X
-            </button>
-          </div>
-        );
-      })}
+    <div className="ToDo__list col-12">
+      {Array.isArray(showTodos) && showTodos.length > 0 ? (
+        showTodos.map((todo, index) => {
+          const { id, content } = todo;
+          const todoInfo = { todoId: id, content };
+
+          return (
+            <div key={index} className="ToDo__item">
+              <input type="checkbox" checked={isTodoCompleted(todo)} onChange={(e) => onUpdateTodoStatus(e, id)} />
+              {updateToDo && updateToDo.todoId === id ? (
+                <input
+                  className="update-todo"
+                  type="text"
+                  value={updateToDo.content}
+                  onBlur={handleOnBlur}
+                  onChange={(e) => handleOnChange(e, id)}
+                  onKeyDown={handleOnKeyDown}
+                  autoFocus
+                />
+              ) : (
+                <>
+                  <span onDoubleClick={() => handleOnDoubleClick(todoInfo)}>{content}</span>
+                  <button className="Todo__delete" onClick={() => onDeleteTodo(id)}>
+                    X
+                  </button>
+                </>
+              )}
+            </div>
+          );
+        })
+      ) : (
+        <div className="text-center">
+          No to do item with the following status: <strong>{showingStatus && showingStatus.toLocaleLowerCase()}</strong>
+        </div>
+      )}
     </div>
   );
 };

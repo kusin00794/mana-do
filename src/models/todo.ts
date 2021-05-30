@@ -1,6 +1,9 @@
+// Need to refactor it
+
 export enum TodoStatus {
   ACTIVE = 'ACTIVE',
-  COMPLETED = 'COMPLETED'
+  COMPLETED = 'COMPLETED',
+  ALL = 'ALL'
 }
 
 export interface Todo {
@@ -9,4 +12,9 @@ export interface Todo {
   content : string
   status?: TodoStatus
   created_date: string
+}
+
+export interface IToResponse {
+  data: Todo[];
+  total: number;
 }

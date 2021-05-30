@@ -19,7 +19,7 @@ const LoginForm = () => {
     const resp = await Service.signIn(userId, password);
 
     localStorage.setItem('auth', JSON.stringify({ token: resp, userId }));
-    history.push(RoutesString.ToDo);
+    history.push(RoutesString.Welcome);
   };
 
   const onChangeField = (e: React.ChangeEvent<HTMLInputElement>) => {

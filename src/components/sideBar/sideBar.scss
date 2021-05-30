@@ -45,16 +45,16 @@
     color: $white-color;
     padding: 5px 15px;
 
-    &::after {
-      position: absolute;
-      top: 50%;
-      right: 15px;
-      content: '';
-      padding: 3px;
-      border: 1px solid $white-color;
-      border-width: 0 3px 3px 0;
-      transform: translate(0, -50%) rotate(135deg);
-    }
+    // &::after {
+    //   position: absolute;
+    //   top: 50%;
+    //   right: 15px;
+    //   content: '';
+    //   padding: 3px;
+    //   border: 1px solid $white-color;
+    //   border-width: 0 3px 3px 0;
+    //   transform: translate(0, -50%) rotate(135deg);
+    // }
 
     &.active {
       box-shadow: inset 3px 0 0 0 $active-color;

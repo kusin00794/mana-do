@@ -2,10 +2,10 @@
 
 exports[`<ToDoPage /> snapshots default render 1`] = `
 <div
-  className="ToDo__container"
+  className="ToDo__container row"
 >
   <div
-    className="Todo__creation"
+    className="Todo__creation col-12"
   >
     <input
       className="Todo__input"
@@ -14,10 +14,19 @@ exports[`<ToDoPage /> snapshots default render 1`] = `
     />
   </div>
   <div
-    className="ToDo__list"
-  />
+    className="ToDo__list col-12"
+  >
+    <div
+      className="text-center"
+    >
+      No to do item with the following status: 
+      <strong>
+        all
+      </strong>
+    </div>
+  </div>
   <div
-    className="Todo__toolbar"
+    className="Todo__toolbar col-12"
   >
     <div />
     <div
