@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ToDoPage /> snapshots default render 1`] = `
+exports[`<ToDoForm /> snapshots default render 1`] = `
 <div
   className="ToDo__container row"
 >

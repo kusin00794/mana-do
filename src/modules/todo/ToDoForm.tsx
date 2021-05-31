@@ -95,14 +95,24 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
     }
   };
 
-  const onUpdateTodoStatus = (e: React.ChangeEvent<HTMLInputElement>, todoId: string) => {
-    dispatch(updateTodoStatus(todoId, e.target.checked));
+  const onUpdateTodoStatus = (checked: boolean, todoId: string) => {
+    dispatch(updateTodoStatus(todoId, checked));
   };
 
   const onUpdateToDo = (todoInfo: UpdateToDoInfo) => {
     dispatch(updateTodo(todoInfo));
   };
 
+  /**
+   * About the toggle all todo here I think it may same behavior with Bulk action
+   * of listing page I have implemented in CMS project
+   * Currently It will set all page but the correct behavior I think here is
+   * When clicking into bulk all we just need to set all items of the current page
+   * then if the user clicks on page 2 we recall the API to get page 2 data
+   * after that, if the user clicks into bulk again we will store all items of page 2
+   * into current stored items (existed page 1).
+   * Same behavior when click in another page
+   */
   const onToggleAllTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(toggleAllTodos(e.target.checked));
   };
@@ -163,17 +173,17 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
           <div />
         )}
         <div className="Todo__tabs">
-          <button className="Action__btn" onClick={() => setShowing(TodoStatus.ALL)}>
+          <button className="Action__btn all" onClick={() => setShowing(TodoStatus.ALL)}>
             All
           </button>
-          <button className="Action__btn" onClick={() => setShowing(TodoStatus.ACTIVE)}>
+          <button className="Action__btn active" onClick={() => setShowing(TodoStatus.ACTIVE)}>
             Active
           </button>
-          <button className="Action__btn" onClick={() => setShowing(TodoStatus.COMPLETED)}>
+          <button className="Action__btn completed" onClick={() => setShowing(TodoStatus.COMPLETED)}>
             Completed
           </button>
         </div>
-        <button className="Action__btn" onClick={onDeleteAllTodo}>
+        <button className="Action__btn clear-all" onClick={onDeleteAllTodo}>
           Clear all todos
         </button>
       </div>

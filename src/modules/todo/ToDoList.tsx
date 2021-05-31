@@ -8,6 +8,11 @@ const ToDoList = (props: IToDoList) => {
   const { showTodos, onUpdateTodoStatus, onDeleteTodo, onUpdateToDo, showingStatus } = props;
   const [updateToDo, setUpdateToDo] = useState<UpdateToDoInfo | null>(null);
 
+  const handleOnUpdateTodoStatus = (e: React.ChangeEvent<HTMLInputElement>, todoId: string) => {
+    const checked = e.target.checked;
+    onUpdateTodoStatus(checked, todoId);
+  };
+
   const handleOnDoubleClick = (todoInfo: UpdateToDoInfo) => {
     setUpdateToDo(todoInfo);
   };
@@ -45,9 +50,17 @@ const ToDoList = (props: IToDoList) => {
 
           return (
             <div key={index} className="ToDo__item">
-              <input type="checkbox" checked={isTodoCompleted(todo)} onChange={(e) => onUpdateTodoStatus(e, id)} />
+              <input
+                key={`checkbox-status-${index}`}
+                id={`checkbox-status-${index}`}
+                type="checkbox"
+                checked={isTodoCompleted(todo)}
+                onChange={(e) => handleOnUpdateTodoStatus(e, id)}
+              />
               {updateToDo && updateToDo.todoId === id ? (
                 <input
+                  key={`input-edit-${index}`}
+                  id={`input-edit-${index}`}
                   className="update-todo"
                   type="text"
                   value={updateToDo.content}

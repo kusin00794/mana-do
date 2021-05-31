@@ -8,7 +8,7 @@ export interface UpdateToDoInfo {
 export interface IToDoList {
   showingStatus: TodoStatus;
   showTodos: Array<Todo>;
-  onUpdateTodoStatus: (e: React.ChangeEvent<HTMLInputElement>, todoId: string) => void;
+  onUpdateTodoStatus: (checked: boolean, todoId: string) => void;
   onDeleteTodo: (todoId: string) => void;
   onUpdateToDo: (todoInfo: UpdateToDoInfo) => void;
-}
+};
