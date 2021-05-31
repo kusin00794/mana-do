@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToDoList /> snapshots default render 1`] = `
+<div
+  className="ToDo__list col-12"
+>
+  <div
+    className="text-center"
+  >
+    No to do item with the following status: 
+    <strong />
+  </div>
+</div>
+`;

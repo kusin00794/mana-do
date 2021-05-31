@@ -65,7 +65,10 @@ const Pagination: FC<IPagination> = ({ total, perPage, handlePagination, externa
 
   return (
     <ul className="pagination">
-      <li className={`pagination-item${currentPage <= firstPage ? ' disabled' : ''}`} onClick={handleOnClickPrev}>
+      <li
+        className={`pagination-prev pagination-item${currentPage <= firstPage ? ' disabled' : ''}`}
+        onClick={handleOnClickPrev}
+      >
         <Link to="#">
           <i className="fa fa-fw fa-angle-left" />
         </Link>
@@ -74,7 +77,7 @@ const Pagination: FC<IPagination> = ({ total, perPage, handlePagination, externa
         return (
           <li
             key={`pagination-item-${index}`}
-            className={`pagination-item${page === currentPage ? ' active' : ''}`}
+            className={`pagination-page-${page} pagination-item${page === currentPage ? ' active' : ''}`}
             onClick={(e) => handleOnClick(e, page)}
           >
             <Link to="#">{page}</Link>
@@ -82,7 +85,7 @@ const Pagination: FC<IPagination> = ({ total, perPage, handlePagination, externa
         );
       })}
       <li
-        className={`pagination-item${currentPage >= pageNumbers.length ? ' disabled' : ''}`}
+        className={`pagination-next pagination-item${currentPage >= pageNumbers.length ? ' disabled' : ''}`}
         onClick={handleOnClickNext}
       >
         <Link to="#">

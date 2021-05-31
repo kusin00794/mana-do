@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination Page snapshots render Pagination Page 1`] = `
+<ul
+  className="pagination"
+>
+  <li
+    className="pagination-prev pagination-item disabled"
+    onClick={[Function]}
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-fw fa-angle-left"
+      />
+    </a>
+  </li>
+  <li
+    className="pagination-next pagination-item disabled"
+    onClick={[Function]}
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-fw fa-angle-right"
+      />
+    </a>
+  </li>
+</ul>
+`;
