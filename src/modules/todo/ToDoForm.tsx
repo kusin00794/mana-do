@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import shortid from 'shortid';
 
+import Toast from '../../components/toast/Toast';
 import ToDoList from './ToDoList';
 import Pagination, { defaultPaginationInfo, firstPage, defaultPerPage } from '../../components/pagination/Pagination';
 import { IPaginationInfo } from '../../components/pagination/Pagination.d';
@@ -36,6 +38,11 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
   });
   const [isRefreshData, setIsRefreshData] = useState(false);
   const [isDeleteAction, setIsDeleteAction] = useState(false);
+  const [toastInfo, setToastInfo] = useState({
+    content: '',
+    type: '',
+    id: '',
+  });
 
   const handleFetchToDo = async () => {
     const resp = await Service.getTodos();
@@ -74,23 +81,36 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
   }, [isRefreshData]);
 
   const onCreateTodo = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === KEY_NAMES.ENTER && inputRef.current && e.currentTarget.value) {
-      try {
-        const resp = await Service.createTodo(inputRef.current.value);
-        dispatch(createTodo(resp));
-        inputRef.current.value = '';
+    if (e.key === KEY_NAMES.ENTER && inputRef.current) {
+      const value = inputRef.current.value.trim() || '';
+      if (value) {
+        try {
+          const resp = await Service.createTodo(value);
+          dispatch(createTodo(resp));
+          inputRef.current.value = '';
 
-        /**
-         * In case user is viewing in completed status
-         * if the user add a new to do then the user can not see it
-         * so I set to the active for the user can see it
-         * We can change it base on REQs also
-         */
-        setShowing(TodoStatus.ACTIVE);
-        setIsRefreshData(true);
-      } catch (e) {
-        if (e.response.status === 401) {
-          history.push(RoutesString.Welcome);
+          /**
+           * In case user is viewing in completed status
+           * if the user add a new to do then the user can not see it
+           * so I set to the active for the user can see it
+           * We can change it base on REQs also
+           */
+          setShowing(TodoStatus.ACTIVE);
+          setIsRefreshData(true);
+          setToastInfo({
+            content: 'Created todo success',
+            type: 'info',
+            id: shortid(),
+          });
+        } catch (e) {
+          setToastInfo({
+            content: 'Created todo failed',
+            type: 'danger',
+            id: shortid(),
+          });
+          if (e.response.status === 401) {
+            history.push(RoutesString.Welcome);
+          }
         }
       }
     }
@@ -98,10 +118,20 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
 
   const onUpdateTodoStatus = (checked: boolean, todoId: string) => {
     dispatch(updateTodoStatus(todoId, checked));
+    setToastInfo({
+      content: 'Updated todo status successful',
+      type: 'info',
+      id: shortid(),
+    });
   };
 
   const onUpdateToDo = (todoInfo: UpdateToDoInfo) => {
     dispatch(updateTodo(todoInfo));
+    setToastInfo({
+      content: 'Updated todo successful',
+      type: 'info',
+      id: shortid(),
+    });
   };
 
   /**
@@ -115,17 +145,32 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
    * Same behavior when click in another page
    */
   const onToggleAllTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setToastInfo({
+      content: 'Updated all todo status successful',
+      type: 'info',
+      id: shortid(),
+    });
     dispatch(toggleAllTodos(e.target.checked));
   };
 
   const onDeleteAllTodo = () => {
     dispatch(deleteAllTodos());
+    setToastInfo({
+      content: 'Deleted all todo successful',
+      type: 'info',
+      id: shortid(),
+    });
   };
 
   const onDeleteTodo = (todoId: string) => {
     dispatch(deleteTodo(todoId));
     setIsDeleteAction(true);
     setIsRefreshData(true);
+    setToastInfo({
+      content: 'Deleted todo successful',
+      type: 'info',
+      id: shortid(),
+    });
   };
 
   const handleUpdateShowingStatus = (status: TodoStatus) => {
@@ -204,6 +249,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
           Clear all todos
         </button>
       </div>
+      <Toast {...toastInfo} />
     </div>
   );
 };

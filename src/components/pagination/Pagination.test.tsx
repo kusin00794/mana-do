@@ -33,8 +33,6 @@ describe('Pagination logic', () => {
     jest.resetModules();
   });
 
-  let wrapper;
-
   test('Should render correct prev button', async () => {
     const wrapper = render(<Wrapper {...defaultProps} />);
     const { container } = wrapper;
@@ -62,7 +60,7 @@ describe('Pagination logic', () => {
   });
 
   test('Should have correct behavior when click next button and prev', async () => {
-    wrapper = render(<Wrapper {...defaultProps} />);
+    const wrapper = render(<Wrapper {...defaultProps} />);
     const { container, rerender } = wrapper;
 
     const nextBtn = container.querySelector('.pagination-next');
@@ -87,7 +85,7 @@ describe('Pagination logic', () => {
   });
 
   test('Should have correct behavior when click item', async () => {
-    wrapper = render(<Wrapper {...defaultProps} />);
+    const wrapper = render(<Wrapper {...defaultProps} />);
     const { container } = wrapper;
 
     const firstPage = container.querySelector('.pagination-page-1');

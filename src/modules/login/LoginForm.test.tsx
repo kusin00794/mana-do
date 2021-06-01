@@ -26,6 +26,71 @@ describe('<LoginForm />', () => {
 });
 
 describe('Handle Logic', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
+
+  test('Should login fail', async () => {
+    Service.signIn = jest.fn().mockRejectedValue('Incorrect username/password');
+    const event = {
+      persist: jest.fn(),
+    };
+    const userInfo = {
+      id: 'firstUser1',
+      password: 'example1',
+    };
+    const wrapper = render(<LoginForm />);
+    const { container } = wrapper;
+    const userId = container.querySelector('#user_id');
+    const userPassword = container.querySelector('#password');
+    const button = container.querySelector('button');
+
+    await wait(() => {
+      userId &&
+        fireEvent.change(userId, {
+          ...event,
+          target: {
+            name: 'userId',
+            value: '',
+          },
+        });
+      userPassword &&
+        fireEvent.change(userPassword, {
+          ...event,
+          target: {
+            name: 'password',
+            value: '',
+          },
+        });
+      button && fireEvent.click(button);
+    });
+
+    await wait(() => {
+      userId &&
+        fireEvent.change(userId, {
+          ...event,
+          target: {
+            name: 'userId',
+            value: userInfo.id,
+          },
+        });
+      userPassword &&
+        fireEvent.change(userPassword, {
+          ...event,
+          target: {
+            name: 'password',
+            value: userInfo.password,
+          },
+        });
+      button && fireEvent.click(button);
+    });
+
+    expect(mockHistoryPush).not.toHaveBeenCalledWith(RoutesString.Welcome);
+  });
+
   test('Should login successfully and redirect user to home page', async () => {
     Service.signIn = jest.fn().mockResolvedValue(mockToken);
     const event = {

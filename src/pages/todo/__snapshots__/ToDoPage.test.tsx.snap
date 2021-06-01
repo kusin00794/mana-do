@@ -57,5 +57,10 @@ exports[`<ToDoPage /> snapshots default render 1`] = `
       Clear all todos
     </button>
   </div>
+  <div
+    className="toast info"
+  >
+    
+  </div>
 </div>
 `;

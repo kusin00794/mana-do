@@ -14,7 +14,7 @@ exports[`<SignInPage /> snapshots default render 1`] = `
       <label
         htmlFor="user_id"
       >
-        User id
+        Username (*) 
         <input
           id="user_id"
           name="userId"
@@ -29,7 +29,8 @@ exports[`<SignInPage /> snapshots default render 1`] = `
       <label
         htmlFor="password"
       >
-        Password
+        Password (*)
+         
         <input
           id="password"
           name="password"
@@ -49,5 +50,10 @@ exports[`<SignInPage /> snapshots default render 1`] = `
       </button>
     </div>
   </form>
+  <div
+    className="toast info"
+  >
+    
+  </div>
 </div>
 `;

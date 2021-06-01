@@ -1,0 +1,82 @@
+@import '../../styles/_zIndex.scss';
+@import '../../styles/variables.scss';
+
+.toast {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  min-width: 250px;
+  padding: 16px;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 16px;
+  color: $white-color;
+  z-index: $zIndexToast;
+  visibility: hidden;
+  transform: translate(-50%, 0);
+
+  &.show {
+    visibility: visible;
+    animation: fadeIn 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  &.danger {
+    background-color: $danger-color;
+  }
+
+  &.warning {
+    background-color: $warning-color;
+  }
+
+  &.info {
+    background-color: $info-color;
+  }
+
+  &.success {
+    background-color: $success-color;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

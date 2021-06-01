@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toast /> snapshots danger render 1`] = `
+<div
+  className="toast show danger"
+>
+  danger
+</div>
+`;
+
+exports[`<Toast /> snapshots default render 1`] = `
+<div
+  className="toast info"
+>
+  danger
+</div>
+`;
+
+exports[`<Toast /> snapshots info render 1`] = `
+<div
+  className="toast info"
+>
+  info
+</div>
+`;
+
+exports[`<Toast /> snapshots success render 1`] = `
+<div
+  className="toast show success"
+>
+  success
+</div>
+`;
+
+exports[`<Toast /> snapshots warning render 1`] = `
+<div
+  className="toast warning"
+>
+  warning
+</div>
+`;
