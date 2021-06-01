@@ -29,6 +29,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
   const [showing, setShowing] = useState<TodoStatus>(TodoStatus.ALL);
   const inputRef = useRef<HTMLInputElement>(null);
   const [paginationInfo, setPaginationInfo] = useState(defaultPaginationInfo);
+  // use for fake data
   const [fromToItem, setFromToItem] = useState({
     from: 0,
     to: defaultPaginationInfo.perPage,
@@ -127,6 +128,14 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
     setIsRefreshData(true);
   };
 
+  const handleUpdateShowingStatus = (status: TodoStatus) => {
+    if (showing === status) {
+      return;
+    }
+
+    setShowing(status);
+  };
+
   // I think we should sort todo list follow some logic like newest, etc
   const showTodos = todos.slice(fromToItem.from, fromToItem.to).filter((todo) => {
     switch (showing) {
@@ -167,19 +176,27 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
         </div>
       )}
       <div className="Todo__toolbar col-12">
-        {todos.length > 0 ? (
-          <input type="checkbox" checked={allCompletedChecked} onChange={onToggleAllTodo} />
-        ) : (
-          <div />
+        {todos.length > 0 && (
+          <input className="check-all" type="checkbox" checked={allCompletedChecked} onChange={onToggleAllTodo} />
         )}
         <div className="Todo__tabs">
-          <button className="Action__btn all" onClick={() => setShowing(TodoStatus.ALL)}>
+          {/* will define Button component and Input component */}
+          <button
+            className={`Action__btn all${showing === TodoStatus.ALL ? ' disabled' : ''}`}
+            onClick={() => handleUpdateShowingStatus(TodoStatus.ALL)}
+          >
             All
           </button>
-          <button className="Action__btn active" onClick={() => setShowing(TodoStatus.ACTIVE)}>
+          <button
+            className={`Action__btn active${showing === TodoStatus.ACTIVE ? ' disabled' : ''}`}
+            onClick={() => handleUpdateShowingStatus(TodoStatus.ACTIVE)}
+          >
             Active
           </button>
-          <button className="Action__btn completed" onClick={() => setShowing(TodoStatus.COMPLETED)}>
+          <button
+            className={`Action__btn completed${showing === TodoStatus.COMPLETED ? ' disabled' : ''}`}
+            onClick={() => handleUpdateShowingStatus(TodoStatus.COMPLETED)}
+          >
             Completed
           </button>
         </div>

@@ -16,9 +16,10 @@
 
     &.disabled {
       background-color: $pagination-disabled-bg-color;
-      cursor: default;
+      cursor: default !important;
 
-      a {
+      a,
+      i {
         cursor: default;
       }
     }
@@ -27,7 +28,7 @@
       border: 1px solid $pagination-bg-color;
       background-color: $pagination-bg-color;
       color: $white-color;
-      cursor: default;
+      cursor: default !important;
 
       a {
         color: $white-color;

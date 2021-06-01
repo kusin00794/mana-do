@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot for LoggedInLayout snapshots render LoggedInLayout 1`] = `
+<div
+  className="layout logged-in-layout"
+>
+  <div
+    className="sidebar-fluid"
+  >
+    <div
+      className="sidebar"
+    >
+      <h3
+        className="sidebar-title text-center"
+      >
+        Menu
+      </h3>
+      <div
+        className="sidebar-section"
+      >
+        <ul
+          className="sidebar-menu"
+        >
+          <li
+            className="sidebar-menu-entry"
+          >
+            <a
+              className="sidebar-menu-entry-link active"
+              href="/"
+              onClick={[Function]}
+            >
+              <span>
+                Home
+              </span>
+            </a>
+          </li>
+          <li
+            className="sidebar-menu-entry"
+          >
+            <a
+              className="sidebar-menu-entry-link"
+              href="/todo"
+              onClick={[Function]}
+            >
+              <span>
+                To Do
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="wrap"
+  >
+    <div
+      className="navbar"
+    >
+      <nav>
+        <ul
+          className="nav"
+        >
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-text"
+              href="/"
+              onClick={[Function]}
+            >
+              <i
+                className="fa fa-home"
+              />
+            </a>
+          </li>
+        </ul>
+        <ul
+          className="nav ml-auto"
+        >
+          <li
+            className="nav-item"
+          >
+            Welcome
+            <strong
+              className="ml-1"
+            >
+              User
+            </strong>
+            ,
+          </li>
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-text"
+              href="/"
+              onClick={[Function]}
+            >
+              <i
+                className="fa fa-power-off"
+              />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      className="content"
+    >
+      <div>
+        Mocked Component
+      </div>
+    </div>
+  </div>
+</div>
+`;

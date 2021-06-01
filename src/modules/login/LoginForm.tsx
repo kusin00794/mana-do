@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Service from '../../service';
 import RoutesString from '../../pages/routesString';
 
+import './LoginForm.scss';
+
 const LoginForm = () => {
   // move to authentication state
   const isLoggedIn = localStorage.getItem('auth');
@@ -39,28 +41,23 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <div style={{ marginTop: '3rem', textAlign: 'left' }}>
-      <form onSubmit={signIn}>
-        <label htmlFor="user_id">
-          User id
-          <input id="user_id" name="userId" value={form.userId} style={{ marginTop: 12 }} onChange={onChangeField} />
-        </label>
-        <br />
-        <label htmlFor="password">
-          Password
-          <input
-            id="password"
-            name="password"
-            type="password"
-            style={{ marginTop: 12 }}
-            value={form.password}
-            onChange={onChangeField}
-          />
-        </label>
-        <br />
-        <button type="submit" style={{ marginTop: 12 }}>
-          Sign in
-        </button>
+    <div className="login-form">
+      <form onSubmit={signIn} className="row">
+        <div className="col-12">
+          <label htmlFor="user_id">
+            User id
+            <input id="user_id" name="userId" value={form.userId} onChange={onChangeField} />
+          </label>
+        </div>
+        <div className="col-12">
+          <label htmlFor="password">
+            Password
+            <input id="password" name="password" type="password" value={form.password} onChange={onChangeField} />
+          </label>
+        </div>
+        <div className="col-12">
+          <button type="submit">Sign in</button>
+        </div>
       </form>
     </div>
   );

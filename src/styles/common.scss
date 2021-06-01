@@ -129,50 +129,56 @@ li {
 }
 
 button {
+  min-width: 80px;
+  min-height: 32px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 2px 0 2px currentColor;
   outline: none;
   border: none;
-  box-shadow: 2px 0 2px currentColor;
-  border-radius: 4px;
-  min-height: 32px;
-  min-width: 80px;
-  padding: 4px 8px;
-}
+  cursor: pointer;
 
-button:hover {
-  opacity: 0.85;
+  :hover {
+    opacity: 0.85;
+  }
 }
 
 input[type='checkbox'] {
   width: 24px;
   height: 24px;
-  box-shadow: none;
   border: none;
+  box-shadow: none;
   outline: none;
-}
+  cursor: pointer;
 
-input[type='checkbox']:focus {
-  box-shadow: none;
-  border: none;
-  outline: none;
+  &:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 input {
   min-height: 36px;
-  border: none;
-  outline: none;
   padding: 0 12px;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid $input-border-color;
   border-radius: 4px;
+  outline: none;
 
   &:checked {
     background: $active-color;
   }
-}
 
-input:focus {
-  box-shadow: 1px 0 9px rgba(0, 0, 0, 0.25);
+  &:focus {
+    box-shadow: 0 2px 12px $input-box-shadow-color;
+  }
 }
 
 .fa-power-off {
   color: $danger-color;
+}
+
+.disabled {
+  background: $disabled-bg-color;
+  cursor: default;
 }

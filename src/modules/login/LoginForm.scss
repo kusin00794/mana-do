@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+
+.login-form {
+  display: flex;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0 24px;
+    display: inline-block;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background: $active-color;
+    color: $white-color;
+  }
+}

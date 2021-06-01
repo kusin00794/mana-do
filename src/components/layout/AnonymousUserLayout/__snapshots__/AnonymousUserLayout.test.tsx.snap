@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot for AnonymousUserLayout snapshots render AnonymousUserLayout 1`] = `
+<div
+  className="layout logged-in-layout"
+>
+  <div>
+    Mocked Component
+  </div>
+</div>
+`;

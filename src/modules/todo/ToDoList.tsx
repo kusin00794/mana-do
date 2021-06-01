@@ -4,6 +4,7 @@ import { KEY_NAMES } from '../../constants/keyCode';
 import { isTodoCompleted } from '../../utils';
 import { IToDoList, UpdateToDoInfo } from './TodoList.d';
 
+// I will build a common page for render only listing page if we need to separate this app to CRUD
 const ToDoList = (props: IToDoList) => {
   const { showTodos, onUpdateTodoStatus, onDeleteTodo, onUpdateToDo, showingStatus } = props;
   const [updateToDo, setUpdateToDo] = useState<UpdateToDoInfo | null>(null);
@@ -54,6 +55,7 @@ const ToDoList = (props: IToDoList) => {
                 key={`checkbox-status-${index}`}
                 id={`checkbox-status-${index}`}
                 type="checkbox"
+                className={`${isTodoCompleted(todo) ? 'done-status' : ''}`}
                 checked={isTodoCompleted(todo)}
                 onChange={(e) => handleOnUpdateTodoStatus(e, id)}
               />
