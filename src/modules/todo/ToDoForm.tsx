@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import shortid from 'shortid';
 
-import Toast from '../../components/toast/Toast';
+import Toast, { validToastType } from '../../components/toast/Toast';
 import ToDoList from './ToDoList';
 import Pagination, { defaultPaginationInfo, firstPage, defaultPerPage } from '../../components/pagination/Pagination';
 import { IPaginationInfo } from '../../components/pagination/Pagination.d';
@@ -24,6 +24,16 @@ import RoutesString from '../../pages/routesString';
 import { UpdateToDoInfo } from './TodoList.d';
 
 import './ToDoForm.scss';
+
+/**
+ * About the toast message will define to a language file for multi language
+ */
+
+/**
+ * About the pagination
+ * currently I stored all item into local storage then just use slice to fake API
+ * if have real API handle it in front end side just need to call and refetch the list
+ */
 
 const ToDoForm = ({ history }: RouteComponentProps) => {
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
@@ -92,20 +102,20 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
           /**
            * In case user is viewing in completed status
            * if the user add a new to do then the user can not see it
-           * so I set to the active for the user can see it
+           * so I set to the all for the user can see it
            * We can change it base on REQs also
            */
-          setShowing(TodoStatus.ACTIVE);
+          setShowing(TodoStatus.ALL);
           setIsRefreshData(true);
           setToastInfo({
             content: 'Created todo success',
-            type: 'info',
+            type: validToastType.info,
             id: shortid(),
           });
         } catch (e) {
           setToastInfo({
             content: 'Created todo failed',
-            type: 'danger',
+            type: validToastType.danger,
             id: shortid(),
           });
           if (e.response.status === 401) {
@@ -120,7 +130,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
     dispatch(updateTodoStatus(todoId, checked));
     setToastInfo({
       content: 'Updated todo status successful',
-      type: 'info',
+      type: validToastType.info,
       id: shortid(),
     });
   };
@@ -129,7 +139,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
     dispatch(updateTodo(todoInfo));
     setToastInfo({
       content: 'Updated todo successful',
-      type: 'info',
+      type: validToastType.info,
       id: shortid(),
     });
   };
@@ -145,19 +155,22 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
    * Same behavior when click in another page
    */
   const onToggleAllTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    const showingStatus = checked ? TodoStatus.COMPLETED : TodoStatus.ACTIVE;
     setToastInfo({
       content: 'Updated all todo status successful',
-      type: 'info',
+      type: validToastType.info,
       id: shortid(),
     });
-    dispatch(toggleAllTodos(e.target.checked));
+    setShowing(showingStatus);
+    dispatch(toggleAllTodos(checked));
   };
 
   const onDeleteAllTodo = () => {
     dispatch(deleteAllTodos());
     setToastInfo({
       content: 'Deleted all todo successful',
-      type: 'info',
+      type: validToastType.info,
       id: shortid(),
     });
   };
@@ -168,7 +181,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
     setIsRefreshData(true);
     setToastInfo({
       content: 'Deleted todo successful',
-      type: 'info',
+      type: validToastType.info,
       id: shortid(),
     });
   };
@@ -182,7 +195,7 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
   };
 
   // I think we should sort todo list follow some logic like newest, etc
-  const showTodos = todos.slice(fromToItem.from, fromToItem.to).filter((todo) => {
+  const allShowTodo = todos.filter((todo) => {
     switch (showing) {
       case TodoStatus.ACTIVE:
         return todo.status === TodoStatus.ACTIVE;
@@ -192,6 +205,11 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
         return true;
     }
   });
+  const showTodos = allShowTodo.slice(fromToItem.from, fromToItem.to);
+
+  useEffect(() => {
+    handlePagination(defaultPaginationInfo);
+  }, [showing]);
 
   const activeTodos = todos.reduce(function (accum, todo) {
     return isTodoCompleted(todo) ? accum : accum + 1;
@@ -211,10 +229,10 @@ const ToDoForm = ({ history }: RouteComponentProps) => {
         onDeleteTodo={onDeleteTodo}
         onUpdateToDo={onUpdateToDo}
       />
-      {todos.length > 0 && (
+      {allShowTodo.length > 0 && (
         <div className="col-12">
           <Pagination
-            total={todos.length}
+            total={allShowTodo.length}
             handlePagination={handlePagination}
             externalCurrentPage={paginationInfo.currentPage}
           />

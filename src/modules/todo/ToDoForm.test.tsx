@@ -141,7 +141,7 @@ describe('ToDoForm logic', () => {
     expect(setState).toHaveBeenCalledWith(TodoStatus.COMPLETED);
   });
 
-  test('Should create todo successfully', async () => {
+  test('Should create todo successfully and set showing status is ALL', async () => {
     const setState = jest.fn();
     const useStateMock: any = (initState: any) => [initState, setState];
     jest.spyOn(React, 'useState').mockImplementation(useStateMock);
@@ -161,7 +161,7 @@ describe('ToDoForm logic', () => {
       todoInput && fireEvent.keyDown(todoInput, { key: 'Enter', keyCode: 13 });
     });
 
-    expect(setState).toHaveBeenCalledWith(TodoStatus.ACTIVE);
+    expect(setState).toHaveBeenCalledWith(TodoStatus.ALL);
     expect(setState).toHaveBeenCalledWith(true);
 
     const newAddedTodo = container.querySelector('.ToDo__item span');

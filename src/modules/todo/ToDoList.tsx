@@ -10,7 +10,7 @@ const ToDoList = (props: IToDoList) => {
   const [updateToDo, setUpdateToDo] = useState<UpdateToDoInfo | null>(null);
 
   const handleOnUpdateTodoStatus = (e: React.ChangeEvent<HTMLInputElement>, todoId: string) => {
-    const checked = e.target.checked;
+    const { checked } = e.target;
     onUpdateTodoStatus(checked, todoId);
   };
 
@@ -33,8 +33,11 @@ const ToDoList = (props: IToDoList) => {
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === KEY_NAMES.ENTER) {
-      if (updateToDo && updateToDo.content) {
-        onUpdateToDo(updateToDo);
+      if (updateToDo && updateToDo.content && updateToDo.content.trim()) {
+        onUpdateToDo({
+          ...updateToDo,
+          content: updateToDo.content.trim(),
+        });
         setUpdateToDo(null);
       } else {
         setUpdateToDo(null);

@@ -43,7 +43,7 @@ const LoginForm = () => {
     } catch (error) {
       setToastInfo({
         content: error,
-        type: 'danger',
+        type: validToastType.danger,
         id: shortid(),
       });
     }
